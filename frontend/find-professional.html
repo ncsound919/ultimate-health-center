@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Professional | Ultimate Health Center</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .pro-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+        .pro-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 1.5rem; transition: transform 0.3s; }
+        .pro-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .pro-img { width: 80px; height: 80px; border-radius: 50%; background: #f0f0f0; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+        .pro-specialty { color: var(--primary); font-weight: bold; margin-bottom: 0.5rem; }
+        .search-pro { margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; display: flex; gap: 1rem; }
+        .search-pro input { flex: 1; padding: 1rem; border: 2px solid #eee; border-radius: 30px; outline: none; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand"><span class="logo-icon">&#9877;</span> UltimateHealth</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="calculators.html">Calculators</a></li>
+            <li><a href="meal-planner.html">Meal Planner</a></li>
+            <li><a href="workout-builder.html">Workouts</a></li>
+            <li><a href="wellness-journal.html">Wellness</a></li>
+            <li><a href="find-professional.html" class="active">Find a Pro</a></li>
+            <li><a href="marketplace.html">Shop</a></li>
+        </ul>
+    </nav>
+    <section class="section">
+        <h1 class="section-title">Connect with Experts</h1>
+        <div class="search-pro">
+            <input type="text" placeholder="Search by name or specialty..." oninput="filterPros(this.value)">
+        </div>
+        <div class="pro-grid" id="proGrid"></div>
+    </section>
+    <script>
+        const pros = [
+            { name: "Dr. Sarah Miller", specialty: "Nutritionist", bio: "Expert in plant-based diets.", icon: "🥗" },
+            { name: "Marcus Thorne", specialty: "Personal Trainer", bio: "HIIT and strength training expert.", icon: "💪" },
+            { name: "Elena Rossi", specialty: "Yoga Instructor", bio: "Yoga and mindfulness expert.", icon: "🧘" }
+        ];
+        function renderPros(filtered) {
+            document.getElementById('proGrid').innerHTML = filtered.map(p => `
+                <div class="pro-card">
+                    <div class="pro-img">${p.icon}</div>
+                    <div class="pro-specialty">${p.specialty}</div>
+                    <h3>${p.name}</h3>
+                    <p style="color:#666; margin-bottom: 1.5rem;">${p.bio}</p>
+                    <button class="btn btn-secondary" style="width:100%">Book Consultation</button>
+                </div>
+            `).join('');
+        }
+        function filterPros(q) { renderPros(pros.filter(p => p.name.toLowerCase().includes(q.toLowerCase()) || p.specialty.toLowerCase().includes(q.toLowerCase()))); }
+        renderPros(pros);
+    </script>
+</body>
+</html>
