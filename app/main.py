@@ -8,7 +8,7 @@ from .stripe_routes import router as stripe_checkout_router
 from .stripe_webhook import router as stripe_webhook_router
 
 
-app = FastAPI(title="Ultimate Health Center API")
+app = FastAPI(title="Uplift Health API")
 
 
 @app.on_event("startup")
@@ -18,7 +18,7 @@ async def on_startup() -> None:
 
 @app.get("/")
 async def root():
-    return {"message": "Ultimate Health Center API is running"}
+    return {"message": "Uplift Health API is running"}
 
 
 @app.post("/api/chat")

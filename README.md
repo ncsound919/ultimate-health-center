@@ -1,4 +1,4 @@
-# Ultimate Health Center
+# Uplift Health
 
 One-stop online health and wellness platform.
 
@@ -20,8 +20,8 @@ This repo is an early scaffold for:
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/ncsound919/ultimate-health-center.git
-   cd ultimate-health-center
+   git clone https://github.com/ncsound919/uplift-health.git
+   cd uplift-health
    ```
 
 2. Create and activate a virtualenv (optional but recommended).
