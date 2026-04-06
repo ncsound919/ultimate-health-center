@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculators | Ultimate Health Center</title>
+<link rel="stylesheet" href="css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  .calc-container { max-width: 800px; margin: 0 auto; }
+  .calc-card { background: #fff; padding: 2rem; border-radius: 8px; border: 1px solid #dfe6e9; margin-bottom: 2rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  select, input { width: 100%; padding: 0.8rem; border: 1px solid #dfe6e9; border-radius: 4px; }
+  .result-box { background: #f9f9f9; padding: 1.5rem; border-radius: 4px; border-left: 5px solid var(--primary); margin-top: 1rem; }
+</style>
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="nav-brand"><span class="logo-icon">&#9877;</span> UltimateHealth</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="calculators.html" class="active">Calculators</a></li>
+    <li><a href="meal-planner.html">Meal Planner</a></li>
+    <li><a href="workout-builder.html">Workouts</a></li>
+    <li><a href="wellness-journal.html">Wellness</a></li>
+    <li><a href="find-professional.html">Find a Pro</a></li>
+    <li><a href="marketplace.html">Shop</a></li>
+  </ul>
+</nav>
+
+<section class="section">
+  <div class="calc-container">
+    <h1 class="section-title">Health Calculators</h1>
+    <p class="section-sub">Scientifically-backed tools to help you understand your body metrics. All calculations happen locally on your device.</p>
+
+    <!-- BMI / TDEE / MACROS -->
+    <div class="calc-card">
+      <h3>BMI & TDEE Calculator</h3>
+      <p style="margin-bottom:1.5rem; color:#666;">Body Mass Index & Total Daily Energy Expenditure (Calories needed to maintain weight).</p>
+      <div class="form-grid">
+        <div class="form-group"><label>Gender</label><select id="gender"><option value="m">Male</option><option value="f">Female</option></select></div>
+        <div class="form-group"><label>Age</label><input type="number" id="age" placeholder="e.g. 30"></div>
+        <div class="form-group"><label>Height (cm)</label><input type="number" id="height" placeholder="e.g. 175"></div>
+        <div class="form-group"><label>Weight (kg)</label><input type="number" id="weight" placeholder="e.g. 70"></div>
+        <div class="form-group" style="grid-column: span 2;">
+          <label>Activity Level</label>
+          <select id="activity">
+            <option value="1.2">Sedentary (Little/no exercise)</option>
+            <option value="1.375">Lightly Active (1-3 days/week)</option>
+            <option value="1.55">Moderately Active (3-5 days/week)</option>
+            <option value="1.725">Very Active (6-7 days/week)</option>
+            <option value="1.9">Extra Active (Physical job + training)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="calculateAll()">Calculate Metrics</button>
+      
+      <div id="fullRes" class="result-box hidden">
+        <p><strong>BMI:</strong> <span id="resBmi"></span> (<span id="resCat"></span>)</p>
+        <p><strong>BMR:</strong> <span id="resBmr"></span> calories/day</p>
+        <p><strong>TDEE:</strong> <span id="resTdee"></span> calories/day</p>
+      </div>
+    </div>
+
+    <!-- WATER -->
+    <div class="calc-card">
+      <h3>Hydration Target</h3>
+      <p style="margin-bottom:1.5rem; color:#666;">Based on your body weight and activity.</p>
+      <div class="form-grid">
+         <div class="form-group"><label>Weight (kg)</label><input type="number" id="waterW" placeholder="e.g. 70"></div>
+         <div class="form-group"><label>Exercise (mins/day)</label><input type="number" id="waterE" placeholder="e.g. 30"></div>
+      </div>
+      <button class="btn btn-primary" onclick="calcWater()">Calculate Water Goal</button>
+      <div id="waterRes" class="result-box hidden">
+        <p>Daily Water Goal: <strong id="resWater"></strong> Liters</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function calculateAll() {
+    const g = document.getElementById('gender').value;
+    const a = parseFloat(document.getElementById('age').value);
+    const h = parseFloat(document.getElementById('height').value);
+    const w = parseFloat(document.getElementById('weight').value);
+    const act = parseFloat(document.getElementById('activity').value);
+
+    if (a && h && w) {
+      // BMI
+      const bmi = (w / ((h / 100) ** 2)).toFixed(1);
+      let cat = '';
+      if (bmi < 18.5) cat = 'Underweight';
+      else if (bmi < 25) cat = 'Normal';
+      else if (bmi < 30) cat = 'Overweight';
+      else cat = 'Obese';
+
+      // BMR (Mifflin-St Jeor)
+      let bmr = 0;
+      if (g === 'm') {
+        bmr = 10 * w + 6.25 * h - 5 * a + 5;
+      } else {
+        bmr = 10 * w + 6.25 * h - 5 * a - 161;
+      }
+
+      const tdee = Math.round(bmr * act);
+
+      document.getElementById('resBmi').innerText = bmi;
+      document.getElementById('resCat').innerText = cat;
+      document.getElementById('resBmr').innerText = Math.round(bmr);
+      document.getElementById('resTdee').innerText = tdee;
+      document.getElementById('fullRes').classList.remove('hidden');
+    }
+  }
+
+  function calcWater() {
+    const w = parseFloat(document.getElementById('waterW').value);
+    const e = parseFloat(document.getElementById('waterE').value);
+    if (w) {
+      const base = w * 0.033;
+      const extra = (e / 30) * 0.35;
+      document.getElementById('resWater').innerText = (base + extra).toFixed(2);
+      document.getElementById('waterRes').classList.remove('hidden');
+    }
+  }
+</script>
+</body>
+</html>
