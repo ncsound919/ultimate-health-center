@@ -6,3 +6,6 @@ transformers
 torch
 accelerate
 llama-cpp-python
+sqlmodel
+passlib[bcrypt]
+python-jose[cryptography]
