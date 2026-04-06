@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Health Center</title>
+<link rel="stylesheet" href="css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- NAV -->
+<nav class="navbar" id="navbar">
+  <div class="nav-brand"><span class="logo-icon">&#9877;</span> UltimateHealth</div>
+  <button class="hamburger" id="hamburger" aria-label="menu">&#9776;</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="calculators.html">Calculators</a></li>
+    <li><a href="meal-planner.html">Meal Planner</a></li>
+    <li><a href="workout-builder.html">Workouts</a></li>
+    <li><a href="wellness-journal.html">Wellness</a></li>
+    <li><a href="find-professional.html">Find a Pro</a></li>
+    <li><a href="marketplace.html">Shop</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Your One-Stop <span class="accent">Health Hub</span></h1>
+    <p>Meal plans, workout builders, wellness journals, health calculators, vitamins, herbal remedies, and certified professionals — all free, all in one place.</p>
+    <div class="hero-cta">
+      <a href="calculators.html" class="btn btn-primary">Get Started Free</a>
+      <a href="find-professional.html" class="btn btn-outline">Find a Professional</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>100%</strong><span>Free Access</span></div>
+      <div class="stat"><strong>500+</strong><span>Health Resources</span></div>
+      <div class="stat"><strong>50+</strong><span>Partner Brands</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="health-ring">
+      <div class="ring-item" style="--i:0">&#127822;</div>
+      <div class="ring-item" style="--i:1">&#127947;</div>
+      <div class="ring-item" style="--i:2">&#129504;</div>
+      <div class="ring-item" style="--i:3">&#128138;</div>
+      <div class="ring-item" style="--i:4">&#127807;</div>
+      <div class="ring-item" style="--i:5">&#9749;</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES GRID -->
+<section class="section" id="features">
+  <h2 class="section-title">Everything You Need to Thrive</h2>
+  <p class="section-sub">Six powerful tools — no account required, data stays on your device.</p>
+  <div class="features-grid">
+    <a href="calculators.html" class="feature-card">
+      <div class="card-icon">&#127959;</div>
+      <h3>Health Calculators</h3>
+      <p>BMI, TDEE, macro breakdown, hydration targets, ideal body weight, and body fat percentage calculators.</p>
+      <span class="card-tag">Free Tool</span>
+    </a>
+    <a href="meal-planner.html" class="feature-card">
+      <div class="card-icon">&#127859;</div>
+      <h3>Meal Planner</h3>
+      <p>Build a 7-day personalized meal plan with calorie and macro tracking. Save and export your plan.</p>
+      <span class="card-tag">Free Tool</span>
+    </a>
+    <a href="workout-builder.html" class="feature-card">
+      <div class="card-icon">&#127947;</div>
+      <h3>Workout Builder</h3>
+      <p>Create custom workout routines by muscle group, equipment, and fitness level. Track sets, reps, and rest.</p>
+      <span class="card-tag">Free Tool</span>
+    </a>
+    <a href="wellness-journal.html" class="feature-card">
+      <div class="card-icon">&#129504;</div>
+      <h3>Wellness Journal</h3>
+      <p>Daily mood tracker, sleep log, stress levels, gratitude entries, and mental health check-ins.</p>
+      <span class="card-tag">Free Tool</span>
+    </a>
+    <a href="find-professional.html" class="feature-card">
+      <div class="card-icon">&#128104;&#8205;&#9877;&#65039;</div>
+      <h3>Find a Professional</h3>
+      <p>Search doctors, dietitians, and personal trainers. Filter by specialty, location, and availability.</p>
+      <span class="card-tag">Directory</span>
+    </a>
+    <a href="marketplace.html" class="feature-card">
+      <div class="card-icon">&#128138;</div>
+      <h3>Health Marketplace</h3>
+      <p>Vitamins, herbal remedies, fitness kits, and wellness products from verified 3rd-party partners.</p>
+      <span class="card-tag">Shop</span>
+    </a>
+  </div>
+</section>
+
+<!-- QUICK BMI WIDGET -->
+<section class="section bmi-widget-section">
+  <div class="widget-container">
+    <div class="widget-text">
+      <h2>Quick BMI Check</h2>
+      <p>Get your Body Mass Index in seconds — no account needed.</p>
+    </div>
+    <div class="widget-form" id="quickBmi">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Height (cm)</label>
+          <input type="number" id="bmiH" placeholder="e.g. 175" min="100" max="250">
+        </div>
+        <div class="form-group">
+          <label>Weight (kg)</label>
+          <input type="number" id="bmiW" placeholder="e.g. 70" min="30" max="300">
+        </div>
+        <button class="btn btn-primary" onclick="calcQuickBMI()">Calculate</button>
+      </div>
+      <div id="bmiResult" class="bmi-result hidden"></div>
+    </div>
+  </div>
+</section>
+
+<!-- WELLNESS TIPS TICKER -->
+<section class="tips-ticker">
+  <div class="ticker-label">Daily Tip</div>
+  <div class="ticker-track" id="tipsTicker"></div>
+</section>
+
+<!-- PARTNER / NETWORK SECTION -->
+<section class="section partners-section">
+  <h2 class="section-title">Open Network for Health Partners</h2>
+  <p class="section-sub">Free to list. Free to connect. Fitness brands, supplement companies, wellness coaches, and health groups are welcome.</p>
+  <div class="partner-grid">
+    <div class="partner-card"><div class="partner-logo">&#127807;</div><span>Herbal Brands</span></div>
+    <div class="partner-card"><div class="partner-logo">&#128170;</div><span>Fitness Groups</span></div>
+    <div class="partner-card"><div class="partner-logo">&#128138;</div><span>Supplement Co.</span></div>
+    <div class="partner-card"><div class="partner-logo">&#129516;</div><span>Mental Wellness</span></div>
+    <div class="partner-card"><div class="partner-logo">&#127859;</div><span>Meal Services</span></div>
+    <div class="partner-card"><div class="partner-logo">&#9877;</div><span>Telehealth</span></div>
+  </div>
+  <a href="#" class="btn btn-primary" style="margin-top:2rem">Join as a Partner</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand"><span class="logo-icon">&#9877;</span> UltimateHealth</div>
+      <p>Your one-stop health and wellness hub. Free for everyone, always.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="calculators.html">Calculators</a></li>
+        <li><a href="meal-planner.html">Meal Planner</a></li>
+        <li><a href="workout-builder.html">Workouts</a></li>
+        <li><a href="wellness-journal.html">Wellness Journal</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="find-professional.html">Find a Pro</a></li>
+        <li><a href="marketplace.html">Marketplace</a></li>
+        <li><a href="#">Partner with Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Ultimate Health Center. Not medical advice. Always consult a qualified healthcare provider.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
